@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000000;
+            overflow: hidden;
+		}
+        #canvasArea {
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+
+        
+	</style>
+    <!-- Libs and GDJS core files : -->
+		<script src="libs/jshashtable.js" crossorigin="anonymous"></script>
+	<script src="logger.js" crossorigin="anonymous"></script>
+	<script src="gd.js" crossorigin="anonymous"></script>
+	<script src="libs/rbush.js" crossorigin="anonymous"></script>
+	<script src="AsyncTasksManager.js" crossorigin="anonymous"></script>
+	<script src="inputmanager.js" crossorigin="anonymous"></script>
+	<script src="jsonmanager.js" crossorigin="anonymous"></script>
+	<script src="Model3DManager.js" crossorigin="anonymous"></script>
+	<script src="ResourceLoader.js" crossorigin="anonymous"></script>
+	<script src="ResourceCache.js" crossorigin="anonymous"></script>
+	<script src="timemanager.js" crossorigin="anonymous"></script>
+	<script src="polygon.js" crossorigin="anonymous"></script>
+	<script src="runtimeobject.js" crossorigin="anonymous"></script>
+	<script src="profiler.js" crossorigin="anonymous"></script>
+	<script src="RuntimeInstanceContainer.js" crossorigin="anonymous"></script>
+	<script src="runtimescene.js" crossorigin="anonymous"></script>
+	<script src="scenestack.js" crossorigin="anonymous"></script>
+	<script src="force.js" crossorigin="anonymous"></script>
+	<script src="RuntimeLayer.js" crossorigin="anonymous"></script>
+	<script src="layer.js" crossorigin="anonymous"></script>
+	<script src="RuntimeCustomObjectLayer.js" crossorigin="anonymous"></script>
+	<script src="timer.js" crossorigin="anonymous"></script>
+	<script src="runtimewatermark.js" crossorigin="anonymous"></script>
+	<script src="runtimegame.js" crossorigin="anonymous"></script>
+	<script src="variable.js" crossorigin="anonymous"></script>
+	<script src="variablescontainer.js" crossorigin="anonymous"></script>
+	<script src="oncetriggers.js" crossorigin="anonymous"></script>
+	<script src="runtimebehavior.js" crossorigin="anonymous"></script>
+	<script src="SpriteAnimator.js" crossorigin="anonymous"></script>
+	<script src="spriteruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="affinetransformation.js" crossorigin="anonymous"></script>
+	<script src="CustomRuntimeObjectInstanceContainer.js" crossorigin="anonymous"></script>
+	<script src="CustomRuntimeObject.js" crossorigin="anonymous"></script>
+	<script src="CustomRuntimeObject2D.js" crossorigin="anonymous"></script>
+	<script src="indexeddb.js" crossorigin="anonymous"></script>
+	<script src="events-tools/commontools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/variabletools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/runtimescenetools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/inputtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/objecttools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/cameratools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/soundtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/storagetools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/stringtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/windowtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/networktools.js" crossorigin="anonymous"></script>
+	<script src="splash/gd-logo-light.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-filters-tools.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/runtimegame-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/runtimescene-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/layer-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-image-manager.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-bitmapfont-manager.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/spriteruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/CustomRuntimeObject2DPixiRenderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/DebuggerPixiRenderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/loadingscreen-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-effects-manager.js" crossorigin="anonymous"></script>
+	<script src="howler-sound-manager/howler.min.js" crossorigin="anonymous"></script>
+	<script src="howler-sound-manager/howler-sound-manager.js" crossorigin="anonymous"></script>
+	<script src="fontfaceobserver-font-manager/fontfaceobserver.js" crossorigin="anonymous"></script>
+	<script src="fontfaceobserver-font-manager/fontfaceobserver-font-manager.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__flash__colortint-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__flash__istinted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__flash__togglecolortint-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__flash__togglevisibility-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementpropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementpropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementpropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementscount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementsgetlist-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementsshownativepopup-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__achievementsunlock-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__addactionparameter-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__addboolactionparameter-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__addtofavorites-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__addtohomescreen-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__advancedbannersstate-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__appendstoragedatadeleterequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__appendstoragedatagetrequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__appendstoragedatasetrequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__authorizeplayer-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__bannerstate-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__checkadblock-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__createpost-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__defaultstoragetype-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__devicetype-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__doesplayerhavename-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__doesplayerhavephoto-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__getservertime-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__hasremoteconfigvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__hasservertime-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__hasstoragedata-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__hideadvancedbanners-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__hidebanner-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__interstitialstate-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__invitefriends-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isachievementsgetlistsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isachievementsnativepopupsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isachievementssupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isadblockdetected-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isaddtofavoritessupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isaddtohomescreensupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isadvancedbannerssupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isbannersupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__iscreatepostsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isdesktop-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isexternallinksallowed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isgetallgamessupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isgetgamebyidsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isinitialized-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isinterstitialsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isinvitefriendssupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isjoincommunitysupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__islastactioncompletedsuccessfully-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__ismobile-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__ispaymentssupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isplayerauthorizationsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isplayerauthorized-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isratesupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isremoteconfigsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isrewardedsupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__issharesupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isstorageavailable-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__isstoragesupported-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__istablet-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__istv-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__joincommunity-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentriescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentryid-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentryname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentryphoto-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentryrank-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardentryscore-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardsgetentries-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardssetscore-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardsshownativepopup-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardstype-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardstypeingame-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardstypenative-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardstypenativepopup-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__leaderboardstypenotavailable-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__minimumdelaybetweeninterstitial-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onachievementsgetlistcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onachievementsshownativepopupcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onachievementsunlockcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onaddtofavoritescompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onaddtohomescreencompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onadvancedbannersfailed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onadvancedbannershidden-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onadvancedbannersloading-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onadvancedbannersshown-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onadvancedbannersstatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onauthorizeplayercompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onbannerfailed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onbannerhidden-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onbannerloading-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onbannershown-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onbannerstatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oncheckadblockcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oncreatepostcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onfirstsceneloaded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__ongetallgamescompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__ongetgamebyidcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__ongetservertimecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninterstitialclosed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninterstitialfailed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninterstitialloading-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninterstitialopened-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninterstitialstatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__oninvitefriendscompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onjoincommunitycompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onleaderboardsgetentriescompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onleaderboardssetscorecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onleaderboardsshownativepopupcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onpaymentsconsumepurchasecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onpaymentsgetcatalogcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onpaymentsgetpurchasescompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onpaymentspurchasecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onratecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onremoteconfiggotcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedclosed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedfailed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedloading-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedopened-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedrewarded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onrewardedstatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onsharecompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onstoragedatadeleterequestcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onstoragedatagetrequestcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onstoragedatasetrequestcompleted-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__onvisibilitystatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentscatalogitempropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentscatalogitempropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentscatalogitempropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentscatalogitemscount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentsconsumepurchase-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentsfirstcatalogitempropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentsgetcatalog-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentsgetpurchases-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentslastpurchasepropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentslastpurchasepropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentslastpurchasepropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentspurchase-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentspurchasepropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentspurchasepropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentspurchasepropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__paymentspurchasescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformallgamepropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformallgamescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformallgamespropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformallgamespropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformgamebyidpropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformgetallgames-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformgetgamebyid-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformid-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformisaudioenabled-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformispaused-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformlanguage-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformonaudiostatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformonpausestatechanged-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformpayload-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__platformtld-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerextrapropertiescount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerextrapropertyname-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerextrapropertyvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerid-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playername-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerphoto-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__playerphotoscount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__rate-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__remoteconfigvalue-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__rewardedplacement-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__rewardedstate-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendcustommessage-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendmessage-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendremoteconfiggetrequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendstoragedatadeleterequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendstoragedatagetrequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__sendstoragedatasetrequest-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__servertime-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__setminimumdelaybetweeninterstitial-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__share-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__showadvancedbanners-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__showbanner-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__showinterstitial-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__showrewarded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__storagedata-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__storagedataasjson-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__playgamabridge__visibilitystate-func.js" crossorigin="anonymous"></script>
+	<script src="Extensions/AnchorBehavior/anchorruntimebehavior.js" crossorigin="anonymous"></script>
+	<script src="Extensions/ParticleSystem/particleemitterobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/ParticleSystem/particleemitterobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/ParticleSystem/pixi-particles-pixi-renderer.min.js" crossorigin="anonymous"></script>
+	<script src="Extensions/PrimitiveDrawing/pixi-graphics-extras/graphics-extras.min.js" crossorigin="anonymous"></script>
+	<script src="Extensions/PrimitiveDrawing/shapepainterruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/PrimitiveDrawing/shapepainterruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TextObject/textruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TextObject/textruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TiledSpriteObject/tiledspriteruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TiledSpriteObject/tiledspriteruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TweenBehavior/TweenManager.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TweenBehavior/tweenruntimebehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/AnimatableBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/EffectBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/FlippableBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/OpacityBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/ResizableBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/ScalableBehavior.js" crossorigin="anonymous"></script>
+	<script src="object-capabilities/TextContainerBehavior.js" crossorigin="anonymous"></script>
+	<script src="Extensions/3D/DirectionalLight.js" crossorigin="anonymous"></script>
+	<script src="Extensions/3D/HemisphereLight.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/brightness-pixi-filter.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/drop-shadow-pixi-filter.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/glitch-pixi-filter.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/glow-pixi-filter.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/pixi-filters/filter-drop-shadow.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/pixi-filters/filter-glitch.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/pixi-filters/filter-glow.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Effects/pixi-filters/filter-kawase-blur.js" crossorigin="anonymous"></script>
+	<script src="code0.js" crossorigin="anonymous"></script>
+	<script src="data.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+    
+	<script>
+
+    (function() {
+        //Initialization
+        var game = new gdjs.RuntimeGame(gdjs.projectData, gdjs.runtimeGameOptions);
+
+        //Create a renderer
+        game.getRenderer().createStandardCanvas(document.body);
+
+        //Bind keyboards/mouse/touch events
+        game.getRenderer().bindStandardEvents(game.getInputManager(), window, document);
+
+        //Load all assets and start the game
+        game.loadAllAssets(function() {
+            game.startGameLoop();
+        });
+    })();
+
+	</script>
+</body>
+</html>
